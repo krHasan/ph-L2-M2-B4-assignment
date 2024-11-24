@@ -16,4 +16,20 @@ const productValidationSchema = z.object({
     inStock: z.boolean().default(true),
 });
 
+export const productUpdateValidationSchema = z.object({
+    name: z
+        .string()
+        .max(255, { message: "Name must be less then 255 characters" })
+        .trim()
+        .optional(),
+    price: z.number().positive("Price must be a positive number").optional(),
+    description: z.string().optional(),
+    quantity: z
+        .number()
+        .int("Quantity must be an integer")
+        .min(0, "Quantity cannot be negative")
+        .optional(),
+    inStock: z.boolean().default(true).optional(),
+});
+
 export default productValidationSchema;
