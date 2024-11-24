@@ -51,11 +51,19 @@ const getProductById = async (req: Request, res: Response) => {
     try {
         const productId = req.params?.productId;
         const result = await ProductServices.getProductByIdFromDB(productId);
-        res.status(200).json({
-            message: "Bike retrieved successfully",
-            success: true,
-            data: result,
-        });
+        if (result) {
+            res.status(200).json({
+                message: "Bike retrieved successfully",
+                success: true,
+                data: result,
+            });
+        } else {
+            res.status(200).json({
+                message: "Bike is not found",
+                success: false,
+                data: {},
+            });
+        }
     } catch (error: any) {
         res.status(500).json({
             message: error.message || "Something went wrong",
@@ -75,11 +83,19 @@ const updateProduct = async (req: Request, res: Response) => {
             productId,
             data
         );
-        res.status(200).json({
-            message: "Bike updated successfully",
-            success: true,
-            data: result,
-        });
+        if (result) {
+            res.status(200).json({
+                message: "Bike updated successfully",
+                success: true,
+                data: result,
+            });
+        } else {
+            res.status(200).json({
+                message: "No data found to update",
+                success: false,
+                data: {},
+            });
+        }
     } catch (error: any) {
         res.status(500).json({
             message: error.message || "Something went wrong",
@@ -94,11 +110,19 @@ const deleteProductById = async (req: Request, res: Response) => {
     try {
         const productId = req.params?.productId;
         const result = await ProductServices.deleteProductIntoDB(productId);
-        res.status(200).json({
-            message: "Bike deleted successfully",
-            success: true,
-            data: result,
-        });
+        if (result.deletedCount > 0) {
+            res.status(200).json({
+                message: "Bike deleted successfully",
+                success: true,
+                data: {},
+            });
+        } else {
+            res.status(200).json({
+                message: "Bike is not deleted",
+                success: false,
+                data: result,
+            });
+        }
     } catch (error: any) {
         res.status(500).json({
             message: error.message || "Something went wrong",
