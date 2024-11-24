@@ -72,7 +72,8 @@ A **Bike Shop Management API** built with **Node.js**, **Express.js**, **TypeScr
     "price": 1200,
     "category": "Mountain",
     "quantity": 5,
-    "description": "A durable mountain bike for rugged terrain."
+    "description": "A durable mountain bike for rugged terrain.",
+    "inStock": true
     }
     ```
 
@@ -135,13 +136,13 @@ A **Bike Shop Management API** built with **Node.js**, **Express.js**, **TypeScr
 ```bash
 ph-L2-M2-B4-assignment/
 ├── src/
-│   ├── app/               # Main application files
+    ├── app/               # Main application files
         ├── config/        # Project configuration files
         ├── modules/       # Modules container
             ├── order/     # Order related files
             ├── product/   # Product related files
-│   ├── app.ts             # Express app configuration
-│   └── server.ts          # Server entry point
+    ├── app.ts             # Express app configuration
+    └── server.ts          # Server entry point
 ├── .env                   # Environment variables
 ├── .gitignore             # Git ignore file list
 ├── package.json           # Project metadata and dependencies
