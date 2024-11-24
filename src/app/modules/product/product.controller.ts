@@ -24,6 +24,48 @@ const createProduct = async (req: Request, res: Response) => {
     }
 };
 
+const getAllProducts = async (req: Request, res: Response) => {
+    try {
+        const searchTerm = req.query?.searchTerm;
+        const result = await ProductServices.getAllProductsFromDB(
+            searchTerm as string
+        );
+        res.status(200).json({
+            message: "Bikes retrieved successfully",
+            success: true,
+            data: result,
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            message: error.message || "Something went wrong",
+            success: false,
+            error: error,
+            stack: error.stack,
+        });
+    }
+};
+
+const getProductById = async (req: Request, res: Response) => {
+    try {
+        const productId = req.params?.productId;
+        const result = await ProductServices.getProductByIdFromDB(productId);
+        res.status(200).json({
+            message: "Bike retrieved successfully",
+            success: true,
+            data: result,
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            message: error.message || "Something went wrong",
+            success: false,
+            error: error,
+            stack: error.stack,
+        });
+    }
+};
+
 export const ProductControllers = {
     createProduct,
+    getAllProducts,
+    getProductById,
 };
